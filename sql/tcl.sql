@@ -1,0 +1,14 @@
+use batch79;
+set autocommit=0;
+create table BankAccount(accountId int,customerNmae varchar(40) not null,balance int,primary key(accountId));
+insert into BankAccount values(1001,'priyanka',5000),(1002,'pinky',10000),(1003,'rahul',15000),(1004,'vijay',25000);
+select *from BankAccount;
+update BankAccount set balance = balance+5000 where accountId=1001;
+savepoint s1;
+update BankAccount set balance = balance+3000 where accountId=1002;
+savepoint s2;
+update BankAccount set balance = balance-2000 where accountId=1001;
+rollback to s2;
+commit;
+update BankAccount set balance = balance-2000 where accountId=1003;
+rollback;

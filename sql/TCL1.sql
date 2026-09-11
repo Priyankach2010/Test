@@ -1,0 +1,21 @@
+use batch79;
+set autocommit=0;
+create table Employee (empId int not null,empName varchar(30) not null,salary int not null,department varchar(30) not null);
+insert into Employee values(1,'a',30000,'d1');
+savepoint sp1;
+insert into Employee values(2,'b',35000,'d2');
+savepoint sp2;
+insert into Employee values(3,'c',40000,'d1');
+savepoint sp3;
+insert into Employee values(4,'d',30000,'d3');
+savepoint sp4;
+insert into Employee values(5,'2',20000,'d4');
+savepoint sp5;
+rollback to sp4;
+select * from Employee;
+rollback;
+commit;
+insert into Employee values(5,'e',20000,'d5');
+insert into Employee values(6,'f',40000,'d4');
+insert into Employee values(7,'g',50000,'d4');
+
